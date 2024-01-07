@@ -1,6 +1,6 @@
 # pyHellShell
 
-pyHellShell is a python implementation of the tool [HellShell](https://github.dev/NUL0x4C/HellShell). pyHellShell takes in a raw payload file and processes it with encryption and obfuscation. Currently, pyHellShell supports 3 types of encryption and 4 types of obfuscation. 
+pyHellShell is a python implementation of the tool [HellShell](https://github.com/NUL0x4C/HellShell). pyHellShell takes in a raw payload file and processes it with encryption and obfuscation. Currently, pyHellShell supports 3 types of encryption and 4 types of obfuscation. 
 
 ## Feature 
 
