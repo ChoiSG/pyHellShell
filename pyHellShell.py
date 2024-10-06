@@ -13,18 +13,20 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 def ipv6fuscation(file_data):
     ipv6Strings = []
 
-    # Pad 16 bytes for ipv6 
+    # Padding 
     remainder = len(file_data) % 16
     if remainder != 0:
         padding_length = 16 - remainder
         file_data += b'\x00' * padding_length
 
-    # Convert to ipv6 
+    # Actually using standard IPv6 notation
     for i in range(0, len(file_data), 16):
         bytes_chunk = file_data[i:i+16]
-        ipv6Strings.append(':'.join('{:02x}'.format(b) for b in bytes_chunk))
+        words = [bytes_chunk[j] << 8 | bytes_chunk[j+1] for j in range(0, 16, 2)]
+        ipv6Strings.append(':'.join('{:04x}'.format(w) for w in words))
 
     return ipv6Strings
+
 
 
 def ipv4fuscation(file_data): 
@@ -84,6 +86,17 @@ def uuidfuscation(file_data):
 """
 # ENCRYPTION methods 
 """
+
+def XOR(data, key):
+    key = key.encode('utf-8')
+    key_len = len(key)
+    print(f"key: {key}")
+    print(f"key length: {key_len}")
+    result = bytearray(data)
+    for i in range(len(data)):
+        result[i] = data[i] ^ key[i % key_len]
+    return result
+
 def xor(file_data, key):
 
     encrypted_data = b''
@@ -267,7 +280,7 @@ def main():
 
         match encryption_method:
             case "xor":
-                encrypted_data = xor(file_data, key)
+                encrypted_data = XOR(file_data, key)
             case "rc4": 
                 encrypted_data = rc4(file_data, key.encode())
             case "aes256":
