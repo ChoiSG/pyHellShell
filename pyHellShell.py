@@ -97,14 +97,14 @@ def XOR(data, key):
         result[i] = data[i] ^ key[i % key_len]
     return result
 
-def xor(file_data, key):
+# def xor(file_data, key):
 
-    encrypted_data = b''
-    for b in range(len(file_data)):
-        each_byte = file_data[b] ^ ord(key[b % len(key)])
-        encrypted_data += bytes([each_byte])
+#     encrypted_data = b''
+#     for b in range(len(file_data)):
+#         each_byte = file_data[b] ^ ord(key[b % len(key)])
+#         encrypted_data += bytes([each_byte])
 
-    return encrypted_data
+#     return encrypted_data
 
 
 # SystemFunction032 Encrypt/Decrypt Functions 
